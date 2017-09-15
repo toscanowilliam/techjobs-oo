@@ -41,7 +41,9 @@ public class JobController {
     public String add(Model model, @Valid JobForm jobForm, Errors errors) {
 
         if (errors.hasErrors()){
-            model.addAttribute(new JobForm());
+            model.addAttribute("name",errors);
+            model.addAttribute(jobForm.getName());
+            return "new-job";
         }
 
         String jobName = jobForm.getName();
@@ -57,7 +59,7 @@ public class JobController {
         // new Job and add it to the jobData data store. Then
         // redirect to the job detail view for the new Job.
 
-        return "";
+        return "redirect:/job?id=" + newJob.getId();
 
     }
 }
